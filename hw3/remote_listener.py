@@ -43,7 +43,7 @@ LOCAL_MQTT_HOST = "172.17.0.2"
 LOCAL_MQTT_PORT = 1883
 LOCAL_MQTT_TOPIC = "face_detection/video_stream"
 #MQTT Set up for remote
-REMOTE_MQTT_HOST = "172.17.0.2"
+REMOTE_MQTT_HOST = "172.17.0.6"
 REMOTE_MQTT_PORT = 1833
 REMOTE_MQTT_TOPIC = "remote/video_stream"
 
