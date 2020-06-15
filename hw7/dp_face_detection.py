@@ -73,17 +73,10 @@ tf_num_detections = tf_sess.graph.get_tensor_by_name('num_detections:0')
 ## capture set up
 cap = cv2.VideoCapture(1)
 
-#Cascade Set up
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
-
 #MQTT Set up
 LOCAL_MQTT_HOST = "172.17.0.2"
 LOCAL_MQTT_PORT = 1883
 LOCAL_MQTT_TOPIC = "face_detection/video_stream"
-
-#MTCNN set up
-
 
 
 #MQTT Helper Functions
@@ -136,8 +129,8 @@ tf_input: image_resized[None, ...]
             #create a frame around the face
             frame = cv2.rectangle(image,(int_box[1], int_box[0]),(int_box[1] + (int_box[3] - int_box[1]),int_box[0] + (int_box[2] - int_box[0])),(255,0,0),2)
             cv2.imwrite('face_img' + str(j) + '.png', frame)
-        encode and package up image for message
-        retval, cropped_img = cv2.imencode('.png', roi_color)
+        #encode and package up image for message
+        retval, cropped_img = cv2.imencode('.png', frame)
         msg = cropped_img.tobytes()
         local_mqttclient.publish(LOCAL_MQTT_TOPIC, payload=msg, qos=2, retain=False)
             
