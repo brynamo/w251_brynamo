@@ -1,0 +1,178 @@
+root@brynamo-server1:~# ibmcloud login
+API endpoint: https://cloud.ibm.com
+
+Email> brynamo1119@gmail.com
+
+Password>
+Authenticating...
+OK
+
+Select an account:
+1. Smart Connect (f6630f7bd43bbb77385b5f59834a0009)
+2. UC Berkeley w251 (e8a3fa73ecba48a7b4150f1ec2d94969) <-> 2082584
+Enter a number> 2
+Targeted account UC Berkeley w251 (e8a3fa73ecba48a7b4150f1ec2d94969) <-> 2082584
+
+
+Select a region (or press enter to skip):
+1. au-syd
+2. in-che
+3. jp-tok
+4. kr-seo
+5. eu-de
+6. eu-gb
+7. us-south
+8. us-east
+Enter a number> 8
+Targeted region us-east
+
+
+API endpoint:      https://cloud.ibm.com
+Region:            us-east
+User:              brynamo1119@gmail.com
+Account:           UC Berkeley w251 (e8a3fa73ecba48a7b4150f1ec2d94969) <-> 2082584
+Resource group:    No resource group targeted, use 'ibmcloud target -g RESOURCE_GROUP'
+CF API endpoint:
+Org:
+Space:
+root@brynamo-server1:~# ibmcloud sl vs help
+NAME:
+  ibmcloud sl vs - Classic infrastructure Virtual Servers
+
+USAGE:
+  ibmcloud sl vs command [arguments...] [command options]
+
+COMMANDS:
+  cancel        Cancel virtual server instance
+  capture       Capture virtual server instance into an image
+  create        Create virtual server instance
+  credentials   List virtual server instance credentials
+  detail        Get details for a virtual server instance
+  dns-sync      Synchronize DNS records for a virtual server instance
+  edit          Edit a virtual server instance's details
+  host-create   Create a host for dedicated virtual servers
+  host-list     List dedicated hosts on your account
+  list          List virtual server instances on your account
+  options       List options for creating virtual server instance
+  pause         Pause an active virtual server instance
+  power-off     Power off an active virtual server instance
+  power-on      Power on a virtual server instance
+  ready         Check if a virtual server instance is ready for use
+  reboot        Reboot an active virtual server instance
+  reload        Reload operating system on a virtual server instance
+  rescue        Reboot a virtual server instance into a rescue image
+  resume        Resume a paused virtual server instance
+  upgrade       Upgrade a virtual server instance
+  help, h       Show help
+
+Enter 'ibmcloud sl vs help [command]' for more information about a command.
+
+root@brynamo-server1:~# ssh-keygen -f ~/Documents/w251/ssh_key_vsi -t ed25519 -b 512
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Saving key "/root/Documents/w251/ssh_key_vsi" failed: No such file or directory
+root@brynamo-server1:~# ls -la
+total 40
+drwx------  7 root root 4096 May 11 01:28 .
+drwxr-xr-x 23 root root 4096 May 11 01:17 ..
+-rw-------  1 root root  138 May 11 01:26 .bash_history
+-rw-r--r--  1 root root 3106 Apr  9  2018 .bashrc
+drwx------  4 root root 4096 May 11 01:28 .bluemix
+drwx------  2 root root 4096 May 11 01:22 .cache
+drwx------  3 root root 4096 May 11 01:22 .gnupg
+drwxr-xr-x  3 root root 4096 May 11 01:23 .local
+-rw-r--r--  1 root root  148 Aug 17  2015 .profile
+drwx------  2 root root 4096 May 11 01:17 .ssh
+root@brynamo-server1:~# ls .ssh/
+authorized_keys
+root@brynamo-server1:~# ls .ssh/authorized_keys
+.ssh/authorized_keys
+root@brynamo-server1:~# mkdir w251
+root@brynamo-server1:~# ssh-keygen -f w251/ssh_key_vsi -t ed25519 -b 512
+Generating public/private ed25519 key pair.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in w251/ssh_key_vsi.
+Your public key has been saved in w251/ssh_key_vsi.pub.
+The key fingerprint is:
+SHA256:bk5+cIZ43JMtT8PtDjEQoAURrGp33IeqMaJgQ3b0j10 root@brynamo-server1
+The key's randomart image is:
++--[ED25519 256]--+
+|     .++o..      |
+|      .o   .     |
+|   . ..   .      |
+|  . o      .     |
+| o o o +SE +o.   |
+|o + . B.O O =o.  |
+|.+..oo =+= =.o   |
+|o... o.=  . ...  |
+|.   ..  o.   ..  |
++----[SHA256]-----+
+root@brynamo-server1:~# ibmcloud sl security sshkey-add MyNewKey --in-file ~/.ssh/id_rsa.pub
+Failed to read SSH key from file: /root/.ssh/id_rsa.pub.
+open /root/.ssh/id_rsa.pub: no such file or directory
+root@brynamo-server1:~# ibmcloud sl security sshkey-add MyNewKey --in-file ~/w251/ssh_key_vsi
+ssh_key_vsi      ssh_key_vsi.pub
+root@brynamo-server1:~# ibmcloud sl security sshkey-add vsi_key --in-file ~/w251/ssh_key_vsi.pub
+OK
+SSH key was added: SHA256:bk5+cIZ43JMtT8PtDjEQoAURrGp33IeqMaJgQ3b0j10
+root@brynamo-server1:~# ibmcloud sl security sshkey-list
+ID        label             fingerprint                                          note
+1810646   vsi_key           SHA256:bk5+cIZ43JMtT8PtDjEQoAURrGp33IeqMaJgQ3b0j10   -
+1809982   w251_PS_Machine   SHA256:PBQV6Ku8qrcSWSvtmBt0AqHazSoiw4ampw59IllTlT8   -
+root@brynamo-server1:~# ibmcloud sl vs create --hostname=test --private --domain=you.cloud --cpu=2 --memory=2048 --datacenter=ams03 --os=UBUNTU_16_64 --san --disk=100 --key=1810646
+This action will incur charges on your account. Continue?> yes
+name                 value
+ID                   102291362
+FQDN                 test.you.cloud
+Created              2020-05-11T01:37:57Z
+GUID                 a31bf95e-84f4-4a1f-84b9-ee22f930083b
+Placement Group ID   -
+root@brynamo-server1:~# ibmcloud sl vs list
+id          hostname          domain                   cpu   memory   public_ip       private_ip       datacenter   action
+102290804   brynamo-server1   UC-Berkeley-w251.cloud   1     1024     169.44.146.50   10.169.231.241   sjc03
+102291362   test              you.cloud                2     2048     -               10.137.108.146   ams03        ASSIGN_NETWORK
+root@brynamo-server1:~# ssh -i w251/ssh_key_vsi root@10.137.108.146
+
+
+^C
+root@brynamo-server1:~# ibmcloud sl vs list
+id          hostname          domain                   cpu   memory   public_ip       private_ip       datacenter   action
+102290804   brynamo-server1   UC-Berkeley-w251.cloud   1     1024     169.44.146.50   10.169.231.241   sjc03
+102291362   test              you.cloud                2     2048     -               10.137.108.146   ams03        POST_INSTALL_COMPLETE
+root@brynamo-server1:~# ibmcloud sl vs list
+id          hostname          domain                   cpu   memory   public_ip       private_ip       datacenter   action
+102290804   brynamo-server1   UC-Berkeley-w251.cloud   1     1024     169.44.146.50   10.169.231.241   sjc03
+102291362   test              you.cloud                2     2048     -               10.137.108.146   ams03
+root@brynamo-server1:~# ssh -i w251/ssh_key_vsi root@10.137.108.146
+The authenticity of host '10.137.108.146 (10.137.108.146)' can't be established.
+ECDSA key fingerprint is SHA256:pHxSZM4IIMKGXMhJfi/2NEQnU9NEfpuGBFWIvFWkvZg.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '10.137.108.146' (ECDSA) to the list of known hosts.
+Enter passphrase for key 'w251/ssh_key_vsi':
+Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-176-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+4 packages can be updated.
+4 updates are security updates.
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+root@test:~# exit
+logout
+Connection to 10.137.108.146 closed.
+root@brynamo-server1:~# exit
+logout
+Connection to 169.44.146.50 closed.
+usa483e7cd0ad7:w251 bmorgan$
