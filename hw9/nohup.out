@@ -1,0 +1,5 @@
+W0628 00:50:08.835130 Reloader tf_logging.py:120] Found more than one graph event per run, or there was a metagraph containing a graph_def, as well as one or more graph events.  Overwriting the graph with the newest event.
+W0628 00:50:08.835130 140442021488384 tf_logging.py:120] Found more than one graph event per run, or there was a metagraph containing a graph_def, as well as one or more graph events.  Overwriting the graph with the newest event.
+W0628 00:50:08.949481 Reloader tf_logging.py:120] Found more than one metagraph event per run. Overwriting the metagraph with the newest event.
+W0628 00:50:08.949481 140442021488384 tf_logging.py:120] Found more than one metagraph event per run. Overwriting the metagraph with the newest event.
+TensorBoard 1.12.1 at http://p100a:6006 (Press CTRL+C to quit)
