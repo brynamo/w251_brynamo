@@ -1,0 +1,681 @@
+root@brynamo-desktop:/home/brynamo/Documents/w251/v2/week11/hw# nano agent_lunar_lander.py 
+root@brynamo-desktop:/home/brynamo/Documents/w251/v2/week11/hw# docker build -t hw11 -f Dockerfile.agent .
+Sending build context to Docker daemon  441.3kB
+Step 1/4 : FROM w251/hw11_base:tx2-4.3_b132
+ ---> e1bc01e217de
+Step 2/4 : COPY agent_lunar_lander.py .
+ ---> 8b890b4ebecb
+Step 3/4 : RUN mkdir /tmp/videos
+ ---> Running in 036062166a90
+Removing intermediate container 036062166a90
+ ---> e74016209b8e
+Step 4/4 : CMD ["python3", "agent_lunar_lander.py"]
+ ---> Running in bd4ca82ca838
+Removing intermediate container bd4ca82ca838
+ ---> cdf0c083f6cd
+Successfully built cdf0c083f6cd
+Successfully tagged hw11:latest
+root@brynamo-desktop:/home/brynamo/Documents/w251/v2/week11/hw# sudo jetson_clocks
+root@brynamo-desktop:/home/brynamo/Documents/w251/v2/week11/hw# time docker run -it --rm --net=host --runtime nvidia  -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix:rw --privileged -v /data/videos:/tmp/videos hw11
+Using TensorFlow backend.
+2020-07-13 22:33:27.891631: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-07-13 22:33:34.250609: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcuda.so.1
+2020-07-13 22:33:34.257442: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.257633: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: NVIDIA Tegra X2 major: 6 minor: 2 memoryClockRate(GHz): 1.3
+pciBusID: 0000:00:00.0
+2020-07-13 22:33:34.257847: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-07-13 22:33:34.264039: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-07-13 22:33:34.271982: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-07-13 22:33:34.274330: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-07-13 22:33:34.281213: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-07-13 22:33:34.284969: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-07-13 22:33:34.303087: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-07-13 22:33:34.303434: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.303731: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.303837: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-07-13 22:33:34.333104: W tensorflow/core/platform/profile_utils/cpu_utils.cc:98] Failed to find bogomips in /proc/cpuinfo; cannot determine CPU frequency
+2020-07-13 22:33:34.335178: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3f38f830 executing computations on platform Host. Devices:
+2020-07-13 22:33:34.335238: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): Host, Default Version
+2020-07-13 22:33:34.409842: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.410137: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3cbb8700 executing computations on platform CUDA. Devices:
+2020-07-13 22:33:34.410191: I tensorflow/compiler/xla/service/service.cc:175]   StreamExecutor device (0): NVIDIA Tegra X2, Compute Capability 6.2
+2020-07-13 22:33:34.411360: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.411490: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: NVIDIA Tegra X2 major: 6 minor: 2 memoryClockRate(GHz): 1.3
+pciBusID: 0000:00:00.0
+2020-07-13 22:33:34.411600: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-07-13 22:33:34.411668: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+2020-07-13 22:33:34.411717: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcufft.so.10.0
+2020-07-13 22:33:34.411763: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcurand.so.10.0
+2020-07-13 22:33:34.411812: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusolver.so.10.0
+2020-07-13 22:33:34.411856: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcusparse.so.10.0
+2020-07-13 22:33:34.411896: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudnn.so.7
+2020-07-13 22:33:34.412068: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.412264: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:34.412343: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-07-13 22:33:34.413173: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcudart.so.10.0
+2020-07-13 22:33:36.782095: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-07-13 22:33:36.782172: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0 
+2020-07-13 22:33:36.782198: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N 
+2020-07-13 22:33:36.783287: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:36.783599: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:973] ARM64 does not support NUMA - returning NUMA node zero
+2020-07-13 22:33:36.783797: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 2915 MB memory) -> physical GPU (device: 0, name: NVIDIA Tegra X2, pci bus id: 0000:00:00.0, compute capability: 6.2)
+Model: "sequential_1"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense_1 (Dense)              (None, 512)               4608      
+_________________________________________________________________
+dense_2 (Dense)              (None, 256)               131328    
+_________________________________________________________________
+dense_3 (Dense)              (None, 4)                 1028      
+=================================================================
+Total params: 136,964
+Trainable params: 136,964
+Non-trainable params: 0
+_________________________________________________________________
+None
+/opt/venv/lib/python3.6/site-packages/numpy/core/fromnumeric.py:3335: RuntimeWarning: Mean of empty slice.
+  out=out, **kwargs)
+/opt/venv/lib/python3.6/site-packages/numpy/core/_methods.py:161: RuntimeWarning: invalid value encountered in double_scalars
+  ret = ret.dtype.type(ret / rcount)
+2020-07-13 22:33:42.331611: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library libcublas.so.10.0
+0 	: Episode || Reward:  -208.9215940661078 	|| Average Reward:  -208.9215940661078 	 epsilon:  0.99
+1 	: Episode || Reward:  -97.95189016122518 	|| Average Reward:  -153.43674211366647 	 epsilon:  0.9801
+2 	: Episode || Reward:  -104.24062498522353 	|| Average Reward:  -137.03803640418548 	 epsilon:  0.9702989999999999
+3 	: Episode || Reward:  -376.99494508524907 	|| Average Reward:  -197.02726357445138 	 epsilon:  0.96059601
+4 	: Episode || Reward:  -205.7535186892634 	|| Average Reward:  -198.7725145974138 	 epsilon:  0.9509900498999999
+5 	: Episode || Reward:  -161.124909951076 	|| Average Reward:  -192.49791382302416 	 epsilon:  0.9414801494009999
+6 	: Episode || Reward:  -150.9456270287414 	|| Average Reward:  -186.56187285241234 	 epsilon:  0.9320653479069899
+7 	: Episode || Reward:  -249.8494893091298 	|| Average Reward:  -194.47282490950204 	 epsilon:  0.92274469442792
+8 	: Episode || Reward:  -245.38169987631537 	|| Average Reward:  -200.1293665724813 	 epsilon:  0.9135172474836407
+9 	: Episode || Reward:  -246.65923252131296 	|| Average Reward:  -204.78235316736448 	 epsilon:  0.9043820750088043
+10 	: Episode || Reward:  -89.6675828399429 	|| Average Reward:  -194.31737404668976 	 epsilon:  0.8953382542587163
+11 	: Episode || Reward:  -223.10914076407056 	|| Average Reward:  -196.71668793980484 	 epsilon:  0.8863848717161291
+12 	: Episode || Reward:  -44.445948229402696 	|| Average Reward:  -185.00355411592776 	 epsilon:  0.8775210229989678
+13 	: Episode || Reward:  -146.38523454454412 	|| Average Reward:  -182.2451027179718 	 epsilon:  0.8687458127689781
+14 	: Episode || Reward:  -97.60420001226606 	|| Average Reward:  -176.60237587092476 	 epsilon:  0.8600583546412883
+15 	: Episode || Reward:  -152.20513578500623 	|| Average Reward:  -175.0775483655548 	 epsilon:  0.8514577710948754
+16 	: Episode || Reward:  -126.97729494166431 	|| Average Reward:  -172.24812169356125 	 epsilon:  0.8429431933839266
+17 	: Episode || Reward:  -77.25654078245623 	|| Average Reward:  -166.9708116429443 	 epsilon:  0.8345137614500874
+18 	: Episode || Reward:  -139.14215964278384 	|| Average Reward:  -165.50614574819903 	 epsilon:  0.8261686238355865
+19 	: Episode || Reward:  -78.82422027477335 	|| Average Reward:  -161.17204947452774 	 epsilon:  0.8179069375972307
+20 	: Episode || Reward:  -79.94452920748472 	|| Average Reward:  -157.30407231895427 	 epsilon:  0.8097278682212583
+21 	: Episode || Reward:  -139.30960961164513 	|| Average Reward:  -156.48614219589476 	 epsilon:  0.8016305895390458
+22 	: Episode || Reward:  -151.7224231315231 	|| Average Reward:  -156.2790239757047 	 epsilon:  0.7936142836436553
+23 	: Episode || Reward:  -77.30978680530411 	|| Average Reward:  -152.98863909360466 	 epsilon:  0.7856781408072188
+24 	: Episode || Reward:  -48.25222871543306 	|| Average Reward:  -148.7991826784778 	 epsilon:  0.7778213593991465
+25 	: Episode || Reward:  -121.80661735073528 	|| Average Reward:  -147.76100708894924 	 epsilon:  0.7700431458051551
+26 	: Episode || Reward:  -130.43022117284778 	|| Average Reward:  -147.11912612909362 	 epsilon:  0.7623427143471035
+27 	: Episode || Reward:  -107.73165808631798 	|| Average Reward:  -145.71243084185164 	 epsilon:  0.7547192872036325
+28 	: Episode || Reward:  -75.06276418118705 	|| Average Reward:  -143.27623543975974 	 epsilon:  0.7471720943315961
+29 	: Episode || Reward:  -160.75277517559624 	|| Average Reward:  -143.85878676428763 	 epsilon:  0.7397003733882802
+30 	: Episode || Reward:  -124.81026597784984 	|| Average Reward:  -143.24431835182187 	 epsilon:  0.7323033696543974
+31 	: Episode || Reward:  -23.024523549424828 	|| Average Reward:  -139.487449764247 	 epsilon:  0.7249803359578534
+32 	: Episode || Reward:  -110.89965467956984 	|| Average Reward:  -138.6211529434992 	 epsilon:  0.7177305325982748
+33 	: Episode || Reward:  -330.52098730191716 	|| Average Reward:  -144.2652657187468 	 epsilon:  0.7105532272722921
+34 	: Episode || Reward:  -92.07430905923854 	|| Average Reward:  -142.77409552847516 	 epsilon:  0.7034476949995692
+35 	: Episode || Reward:  -49.293682659263666 	|| Average Reward:  -140.1774173932193 	 epsilon:  0.6964132180495735
+36 	: Episode || Reward:  -19.421212675624275 	|| Average Reward:  -136.91373618463564 	 epsilon:  0.6894490858690777
+37 	: Episode || Reward:  -48.19722900689776 	|| Average Reward:  -134.5790912589057 	 epsilon:  0.682554595010387
+38 	: Episode || Reward:  -30.91224509981261 	|| Average Reward:  -131.92096699841613 	 epsilon:  0.6757290490602831
+39 	: Episode || Reward:  -26.9095284903657 	|| Average Reward:  -129.29568103571484 	 epsilon:  0.6689717585696803
+40 	: Episode || Reward:  -60.82248369054443 	|| Average Reward:  -127.62560305168628 	 epsilon:  0.6622820409839835
+41 	: Episode || Reward:  -152.1191831420497 	|| Average Reward:  -128.20878353002828 	 epsilon:  0.6556592205741436
+42 	: Episode || Reward:  -382.56366952862834 	|| Average Reward:  -134.12401343697246 	 epsilon:  0.6491026283684022
+43 	: Episode || Reward:  -91.17746650103429 	|| Average Reward:  -133.1479555520648 	 epsilon:  0.6426116020847181
+44 	: Episode || Reward:  -41.918760137453816 	|| Average Reward:  -131.12064009840677 	 epsilon:  0.6361854860638709
+45 	: Episode || Reward:  -10.439488647410855 	|| Average Reward:  -128.49713680599382 	 epsilon:  0.6298236312032323
+46 	: Episode || Reward:  -89.6407063196352 	|| Average Reward:  -127.67040424245427 	 epsilon:  0.6235253948912
+47 	: Episode || Reward:  -39.38925385657153 	|| Average Reward:  -125.83121360941503 	 epsilon:  0.617290140942288
+48 	: Episode || Reward:  -36.75886314650164 	|| Average Reward:  -124.01341053874332 	 epsilon:  0.6111172395328651
+49 	: Episode || Reward:  21.953531009691645 	|| Average Reward:  -121.09407170777462 	 epsilon:  0.6050060671375365
+50 	: Episode || Reward:  -60.25638142406948 	|| Average Reward:  -119.90117581985884 	 epsilon:  0.5989560064661611
+51 	: Episode || Reward:  -79.2654484147453 	|| Average Reward:  -119.11971952360665 	 epsilon:  0.5929664464014994
+52 	: Episode || Reward:  50.00207816126289 	|| Average Reward:  -115.92874220879779 	 epsilon:  0.5870367819374844
+53 	: Episode || Reward:  -33.36363551832973 	|| Average Reward:  -114.39975875156689 	 epsilon:  0.5811664141181095
+54 	: Episode || Reward:  -18.589108085319126 	|| Average Reward:  -112.65774692127148 	 epsilon:  0.5753547499769285
+55 	: Episode || Reward:  -0.5187522900553176 	|| Average Reward:  -110.65526487428549 	 epsilon:  0.5696012024771592
+56 	: Episode || Reward:  -57.538802752325765 	|| Average Reward:  -109.72339711775987 	 epsilon:  0.5639051904523876
+57 	: Episode || Reward:  10.5867663278854 	|| Average Reward:  -107.64908395490393 	 epsilon:  0.5582661385478638
+58 	: Episode || Reward:  -57.654370665658675 	|| Average Reward:  -106.80171593305232 	 epsilon:  0.5526834771623851
+59 	: Episode || Reward:  15.170106351598875 	|| Average Reward:  -104.76885222830812 	 epsilon:  0.5471566423907612
+60 	: Episode || Reward:  -77.1373671250369 	|| Average Reward:  -104.31587706268073 	 epsilon:  0.5416850759668536
+61 	: Episode || Reward:  -60.59200686286694 	|| Average Reward:  -103.61065334978049 	 epsilon:  0.536268225207185
+62 	: Episode || Reward:  -8.723106762542344 	|| Average Reward:  -102.10450181664973 	 epsilon:  0.5309055429551132
+63 	: Episode || Reward:  -57.26456419926417 	|| Average Reward:  -101.40387779137808 	 epsilon:  0.525596487525562
+64 	: Episode || Reward:  -95.69320944226523 	|| Average Reward:  -101.31602135523788 	 epsilon:  0.5203405226503064
+65 	: Episode || Reward:  -25.223122973975677 	|| Average Reward:  -100.16309865249148 	 epsilon:  0.5151371174238033
+66 	: Episode || Reward:  -55.86899920037996 	|| Average Reward:  -99.50199269051967 	 epsilon:  0.5099857462495653
+67 	: Episode || Reward:  -188.74270667875544 	|| Average Reward:  -100.81435613152314 	 epsilon:  0.5048858887870696
+68 	: Episode || Reward:  12.412799177662166 	|| Average Reward:  -99.17338286617263 	 epsilon:  0.4998370298991989
+69 	: Episode || Reward:  -44.75707585876192 	|| Average Reward:  -98.39600705178105 	 epsilon:  0.49483865960020695
+70 	: Episode || Reward:  -10.109754732206426 	|| Average Reward:  -97.15253870925183 	 epsilon:  0.4898902730042049
+71 	: Episode || Reward:  -99.65914873358153 	|| Average Reward:  -97.18735273736753 	 epsilon:  0.48499137027416284
+72 	: Episode || Reward:  -31.182263834686523 	|| Average Reward:  -96.2831734373308 	 epsilon:  0.4801414565714212
+73 	: Episode || Reward:  -60.44193776697098 	|| Average Reward:  -95.79883241475838 	 epsilon:  0.475340042005707
+74 	: Episode || Reward:  -51.182947836837556 	|| Average Reward:  -95.20395395371943 	 epsilon:  0.47058664158564995
+75 	: Episode || Reward:  -32.69044065998774 	|| Average Reward:  -94.38140772617032 	 epsilon:  0.4658807751697934
+76 	: Episode || Reward:  -99.32396933050384 	|| Average Reward:  -94.44559683791492 	 epsilon:  0.4612219674180955
+77 	: Episode || Reward:  -53.00349967226808 	|| Average Reward:  -93.91428789989381 	 epsilon:  0.45660974774391455
+78 	: Episode || Reward:  -138.94406707340153 	|| Average Reward:  -94.48428510462175 	 epsilon:  0.4520436502664754
+79 	: Episode || Reward:  -24.59695538701972 	|| Average Reward:  -93.61069348315172 	 epsilon:  0.44752321376381066
+80 	: Episode || Reward:  -32.718384896150546 	|| Average Reward:  -92.8589365870159 	 epsilon:  0.44304798162617254
+81 	: Episode || Reward:  34.826157490096854 	|| Average Reward:  -91.30180129339257 	 epsilon:  0.4386175018099108
+82 	: Episode || Reward:  -9.586416594494565 	|| Average Reward:  -90.31727858617694 	 epsilon:  0.4342313267918117
+83 	: Episode || Reward:  -44.083048821115995 	|| Average Reward:  -89.76687108897383 	 epsilon:  0.4298890135238936
+84 	: Episode || Reward:  91.45375687850664 	|| Average Reward:  -87.63486370112113 	 epsilon:  0.42559012338865465
+85 	: Episode || Reward:  -78.19632668160968 	|| Average Reward:  -87.52511327066169 	 epsilon:  0.4213342221547681
+86 	: Episode || Reward:  -27.606007601883803 	|| Average Reward:  -86.83638791814701 	 epsilon:  0.41712087993322045
+87 	: Episode || Reward:  12.148057958449122 	|| Average Reward:  -85.71156466954932 	 epsilon:  0.41294967113388825
+88 	: Episode || Reward:  30.671470544650106 	|| Average Reward:  -84.40389011658078 	 epsilon:  0.40882017442254937
+89 	: Episode || Reward:  -24.985667266035023 	|| Average Reward:  -83.7436876404636 	 epsilon:  0.4047319726783239
+90 	: Episode || Reward:  -143.5471017646563 	|| Average Reward:  -84.40086801545473 	 epsilon:  0.40068465295154065
+91 	: Episode || Reward:  7.378301894135717 	|| Average Reward:  -83.4032683425244 	 epsilon:  0.39667780642202527
+92 	: Episode || Reward:  -178.03102467183345 	|| Average Reward:  -84.42077109875353 	 epsilon:  0.392711028357805
+93 	: Episode || Reward:  -19.24304221664991 	|| Average Reward:  -83.72739100426307 	 epsilon:  0.38878391807422696
+94 	: Episode || Reward:  35.96787180506868 	|| Average Reward:  -82.46744086942799 	 epsilon:  0.3848960788934847
+95 	: Episode || Reward:  -119.35307955260181 	|| Average Reward:  -82.85166627237773 	 epsilon:  0.38104711810454983
+96 	: Episode || Reward:  -28.4326478082955 	|| Average Reward:  -82.29064546346966 	 epsilon:  0.37723664692350434
+97 	: Episode || Reward:  21.401295401528344 	|| Average Reward:  -81.23256443423499 	 epsilon:  0.37346428045426927
+98 	: Episode || Reward:  55.573533016110154 	|| Average Reward:  -79.85068466200929 	 epsilon:  0.36972963764972655
+99 	: Episode || Reward:  123.67273600735486 	|| Average Reward:  -77.81545045531564 	 epsilon:  0.36603234127322926
+100 	: Episode || Reward:  136.66247107423848 	|| Average Reward:  -74.35960980391218 	 epsilon:  0.36237201786049694
+101 	: Episode || Reward:  33.69241336265401 	|| Average Reward:  -73.04316676867339 	 epsilon:  0.358748297681892
+102 	: Episode || Reward:  41.14250883215766 	|| Average Reward:  -71.58933543049957 	 epsilon:  0.35516081470507305
+103 	: Episode || Reward:  -3.098138896680595 	|| Average Reward:  -67.85036736861389 	 epsilon:  0.3516092065580223
+104 	: Episode || Reward:  21.543641290860286 	|| Average Reward:  -65.57739576881265 	 epsilon:  0.34809311449244207
+105 	: Episode || Reward:  17.73776405560119 	|| Average Reward:  -63.78876902874588 	 epsilon:  0.34461218334751764
+106 	: Episode || Reward:  -137.41053152866914 	|| Average Reward:  -63.653418073745144 	 epsilon:  0.34116606151404244
+107 	: Episode || Reward:  117.49943925392603 	|| Average Reward:  -59.97992878811459 	 epsilon:  0.337754400898902
+108 	: Episode || Reward:  -281.82056555627037 	|| Average Reward:  -60.34431744491414 	 epsilon:  0.334376856889913
+109 	: Episode || Reward:  -41.26792099265337 	|| Average Reward:  -58.290404329627556 	 epsilon:  0.33103308832101386
+110 	: Episode || Reward:  114.69828273815612 	|| Average Reward:  -56.24674567384657 	 epsilon:  0.3277227574378037
+111 	: Episode || Reward:  -20.10212296610068 	|| Average Reward:  -54.216675495866866 	 epsilon:  0.3244455298634257
+112 	: Episode || Reward:  18.25974670804922 	|| Average Reward:  -53.589618546492346 	 epsilon:  0.3212010745647914
+113 	: Episode || Reward:  99.76302295845734 	|| Average Reward:  -51.12813597146233 	 epsilon:  0.3179890638191435
+114 	: Episode || Reward:  13.446556299210812 	|| Average Reward:  -50.01762840834756 	 epsilon:  0.31480917318095203
+115 	: Episode || Reward:  36.97932807266111 	|| Average Reward:  -48.12578376977089 	 epsilon:  0.3116610814491425
+116 	: Episode || Reward:  137.9669030538461 	|| Average Reward:  -45.47634178981579 	 epsilon:  0.30854447063465107
+117 	: Episode || Reward:  122.15644051657665 	|| Average Reward:  -43.482211976825454 	 epsilon:  0.30545902592830454
+118 	: Episode || Reward:  -178.90100834633623 	|| Average Reward:  -43.87980046386098 	 epsilon:  0.3024044356690215
+119 	: Episode || Reward:  151.31808717730826 	|| Average Reward:  -41.57837738934017 	 epsilon:  0.29938039131233124
+120 	: Episode || Reward:  88.01624815916688 	|| Average Reward:  -39.89876961567364 	 epsilon:  0.2963865873992079
+121 	: Episode || Reward:  105.82665518084244 	|| Average Reward:  -37.44740696774877 	 epsilon:  0.29342272152521587
+122 	: Episode || Reward:  53.52178931872295 	|| Average Reward:  -35.39496484324631 	 epsilon:  0.2904884943099637
+123 	: Episode || Reward:  36.861170693200506 	|| Average Reward:  -34.25325526826127 	 epsilon:  0.28758360936686406
+124 	: Episode || Reward:  25.897038507728055 	|| Average Reward:  -33.51176259602966 	 epsilon:  0.2847077732731954
+125 	: Episode || Reward:  129.36928768392104 	|| Average Reward:  -31.000003545683093 	 epsilon:  0.28186069554046345
+126 	: Episode || Reward:  -11.152664414683386 	|| Average Reward:  -29.80722797810145 	 epsilon:  0.2790420885850588
+127 	: Episode || Reward:  -129.59049923720653 	|| Average Reward:  -30.025816389610338 	 epsilon:  0.2762516676992082
+128 	: Episode || Reward:  -162.47472360666018 	|| Average Reward:  -30.899935983865067 	 epsilon:  0.27348915102221616
+129 	: Episode || Reward:  219.387241133066 	|| Average Reward:  -27.09853582077845 	 epsilon:  0.270754259511994
+130 	: Episode || Reward:  -96.0287463425308 	|| Average Reward:  -26.810720624425258 	 epsilon:  0.26804671691687404
+131 	: Episode || Reward:  173.44609721627444 	|| Average Reward:  -24.846014416768266 	 epsilon:  0.2653662497477053
+132 	: Episode || Reward:  -21.214389433037894 	|| Average Reward:  -23.94916176430295 	 epsilon:  0.2627125872502282
+133 	: Episode || Reward:  138.71112614547806 	|| Average Reward:  -19.256840629828993 	 epsilon:  0.2600854613777259
+134 	: Episode || Reward:  -37.472407889224215 	|| Average Reward:  -18.710821618128847 	 epsilon:  0.2574846067639487
+135 	: Episode || Reward:  47.58734820323386 	|| Average Reward:  -17.742011309503877 	 epsilon:  0.2549097606963092
+136 	: Episode || Reward:  -13.803035805082132 	|| Average Reward:  -17.68582954079845 	 epsilon:  0.2523606630893461
+137 	: Episode || Reward:  141.28332011131388 	|| Average Reward:  -15.791024049616334 	 epsilon:  0.24983705645845267
+138 	: Episode || Reward:  -62.06000218469697 	|| Average Reward:  -16.102501620465176 	 epsilon:  0.24733868589386815
+139 	: Episode || Reward:  -3.5507642540382847 	|| Average Reward:  -15.868913978101903 	 epsilon:  0.24486529903492946
+140 	: Episode || Reward:  139.1017559193536 	|| Average Reward:  -13.869671582002924 	 epsilon:  0.24241664604458016
+141 	: Episode || Reward:  111.65243160489632 	|| Average Reward:  -11.231955434533466 	 epsilon:  0.23999247958413436
+142 	: Episode || Reward:  -57.52919062823656 	|| Average Reward:  -7.981610645529547 	 epsilon:  0.23759255478829303
+143 	: Episode || Reward:  51.240200875695635 	|| Average Reward:  -6.557433971762247 	 epsilon:  0.2352166292404101
+144 	: Episode || Reward:  48.86411655548372 	|| Average Reward:  -5.649605204832872 	 epsilon:  0.232864462948006
+145 	: Episode || Reward:  -50.772061147157146 	|| Average Reward:  -6.052930929830333 	 epsilon:  0.23053581831852593
+146 	: Episode || Reward:  -183.62412557368347 	|| Average Reward:  -6.992765122370816 	 epsilon:  0.22823046013534068
+147 	: Episode || Reward:  60.32927888422594 	|| Average Reward:  -5.995579794962842 	 epsilon:  0.22594815553398728
+148 	: Episode || Reward:  -110.1106067733712 	|| Average Reward:  -6.729097231231537 	 epsilon:  0.22368867397864742
+149 	: Episode || Reward:  -112.21982357302605 	|| Average Reward:  -8.070830777058713 	 epsilon:  0.22145178723886094
+150 	: Episode || Reward:  -44.22323219256407 	|| Average Reward:  -7.9104992847436595 	 epsilon:  0.21923726936647234
+151 	: Episode || Reward:  129.53196856734186 	|| Average Reward:  -5.822525114922787 	 epsilon:  0.2170448966728076
+152 	: Episode || Reward:  197.6938442843903 	|| Average Reward:  -4.345607453691513 	 epsilon:  0.21487444770607952
+153 	: Episode || Reward:  38.51597549961648 	|| Average Reward:  -3.6268113435120513 	 epsilon:  0.21272570322901874
+154 	: Episode || Reward:  215.10851697368184 	|| Average Reward:  -1.2898350929220412 	 epsilon:  0.21059844619672854
+155 	: Episode || Reward:  199.66427396980112 	|| Average Reward:  0.711995169676523 	 epsilon:  0.20849246173476127
+156 	: Episode || Reward:  179.84291658072505 	|| Average Reward:  3.0858123630070304 	 epsilon:  0.20640753711741366
+157 	: Episode || Reward:  -30.97758777088876 	|| Average Reward:  2.670168822019288 	 epsilon:  0.20434346174623952
+158 	: Episode || Reward:  -88.14500281298466 	|| Average Reward:  2.365262500546028 	 epsilon:  0.20230002712877712
+159 	: Episode || Reward:  17.774583839559725 	|| Average Reward:  2.3913072754256373 	 epsilon:  0.20027702685748935
+160 	: Episode || Reward:  219.00356287767704 	|| Average Reward:  5.352716575452777 	 epsilon:  0.19827425658891445
+161 	: Episode || Reward:  217.73696898243807 	|| Average Reward:  8.136006333905826 	 epsilon:  0.1962915140230253
+162 	: Episode || Reward:  -104.48306615077288 	|| Average Reward:  7.178406740023521 	 epsilon:  0.19432859888279505
+163 	: Episode || Reward:  -116.53757552828895 	|| Average Reward:  6.585676626733273 	 epsilon:  0.1923853128939671
+164 	: Episode || Reward:  104.1506589345051 	|| Average Reward:  8.584115310500977 	 epsilon:  0.19046145976502743
+165 	: Episode || Reward:  -33.91261160472712 	|| Average Reward:  8.497220424193465 	 epsilon:  0.18855684516737714
+166 	: Episode || Reward:  169.65418997417498 	|| Average Reward:  10.752452315939014 	 epsilon:  0.18667127671570335
+167 	: Episode || Reward:  138.1067176164985 	|| Average Reward:  14.020946558891554 	 epsilon:  0.18480456394854633
+168 	: Episode || Reward:  239.5225629749367 	|| Average Reward:  16.2920441968643 	 epsilon:  0.18295651830906087
+169 	: Episode || Reward:  113.52616106687607 	|| Average Reward:  17.87487656612068 	 epsilon:  0.18112695312597027
+170 	: Episode || Reward:  82.64856291861915 	|| Average Reward:  18.802459742628933 	 epsilon:  0.17931568359471056
+171 	: Episode || Reward:  8.877340518764527 	|| Average Reward:  19.88782463515239 	 epsilon:  0.17752252675876345
+172 	: Episode || Reward:  142.58971308242195 	|| Average Reward:  21.625544404323477 	 epsilon:  0.17574730149117582
+173 	: Episode || Reward:  216.35458993512867 	|| Average Reward:  24.393509681344472 	 epsilon:  0.17398982847626407
+174 	: Episode || Reward:  -104.24788620407028 	|| Average Reward:  23.86286029767215 	 epsilon:  0.17224993019150142
+175 	: Episode || Reward:  -82.2784825348729 	|| Average Reward:  23.366979878923292 	 epsilon:  0.1705274308895864
+176 	: Episode || Reward:  -195.01238603037055 	|| Average Reward:  22.410095711924626 	 epsilon:  0.16882215658069055
+177 	: Episode || Reward:  -168.5393211302269 	|| Average Reward:  21.254737497345037 	 epsilon:  0.16713393501488363
+178 	: Episode || Reward:  259.80615051821746 	|| Average Reward:  25.242239673261228 	 epsilon:  0.16546259566473479
+179 	: Episode || Reward:  -62.56037294671768 	|| Average Reward:  24.862605497664244 	 epsilon:  0.16380796970808745
+180 	: Episode || Reward:  107.81122424439354 	|| Average Reward:  26.267901589069695 	 epsilon:  0.16216989001100657
+181 	: Episode || Reward:  124.52176867615427 	|| Average Reward:  27.164857700930273 	 epsilon:  0.1605481911108965
+182 	: Episode || Reward:  123.33500452347789 	|| Average Reward:  28.494071912109995 	 epsilon:  0.15894270919978754
+183 	: Episode || Reward:  32.70995925294898 	|| Average Reward:  29.262001992850642 	 epsilon:  0.15735328210778965
+184 	: Episode || Reward:  -23.35735805096872 	|| Average Reward:  28.113890843555893 	 epsilon:  0.15577974928671176
+185 	: Episode || Reward:  209.25673177973508 	|| Average Reward:  30.98842142816933 	 epsilon:  0.15422195179384465
+186 	: Episode || Reward:  92.84632220708664 	|| Average Reward:  32.19294472625904 	 epsilon:  0.1526797322759062
+187 	: Episode || Reward:  114.5794081391281 	|| Average Reward:  33.21725822806584 	 epsilon:  0.15115293495314713
+188 	: Episode || Reward:  -260.2154864285418 	|| Average Reward:  30.308388658333914 	 epsilon:  0.14964140560361566
+189 	: Episode || Reward:  -36.81729858308211 	|| Average Reward:  30.19007234516344 	 epsilon:  0.1481449915475795
+190 	: Episode || Reward:  183.9590031099674 	|| Average Reward:  33.465133393909674 	 epsilon:  0.1466635416321037
+191 	: Episode || Reward:  97.04484705935646 	|| Average Reward:  34.361798845561886 	 epsilon:  0.14519690621578268
+192 	: Episode || Reward:  147.7516544488271 	|| Average Reward:  37.61962563676849 	 epsilon:  0.14374493715362485
+193 	: Episode || Reward:  237.90007799876702 	|| Average Reward:  40.191056838922655 	 epsilon:  0.1423074877820886
+194 	: Episode || Reward:  127.89595586035638 	|| Average Reward:  41.110337679475535 	 epsilon:  0.1408844129042677
+195 	: Episode || Reward:  64.00648697395391 	|| Average Reward:  42.94393334474109 	 epsilon:  0.13947556877522502
+196 	: Episode || Reward:  -194.52804992460986 	|| Average Reward:  41.28297932357795 	 epsilon:  0.13808081308747278
+197 	: Episode || Reward:  270.82351929074235 	|| Average Reward:  43.77720156247008 	 epsilon:  0.13670000495659804
+198 	: Episode || Reward:  -34.536227929906914 	|| Average Reward:  42.87610395300992 	 epsilon:  0.13533300490703207
+199 	: Episode || Reward:  -12.00276938424365 	|| Average Reward:  41.51934889909393 	 epsilon:  0.13397967485796175
+200 	: Episode || Reward:  248.4835254613718 	|| Average Reward:  42.63755944296527 	 epsilon:  0.13263987810938213
+201 	: Episode || Reward:  305.95115893443926 	|| Average Reward:  45.360146898683126 	 epsilon:  0.1313134793282883
+202 	: Episode || Reward:  205.96443238202744 	|| Average Reward:  47.00836613418183 	 epsilon:  0.13000034453500542
+203 	: Episode || Reward:  273.7576913903813 	|| Average Reward:  49.776924437052436 	 epsilon:  0.12870034108965536
+204 	: Episode || Reward:  271.9316998982065 	|| Average Reward:  52.28080502312591 	 epsilon:  0.12741333767875881
+205 	: Episode || Reward:  243.79666855437424 	|| Average Reward:  54.54139406811363 	 epsilon:  0.12613920430197123
+206 	: Episode || Reward:  -3.9203730740457132 	|| Average Reward:  55.87629565265988 	 epsilon:  0.12487781225895152
+207 	: Episode || Reward:  216.9379834808986 	|| Average Reward:  56.870681094929594 	 epsilon:  0.123629034136362
+208 	: Episode || Reward:  216.00403447499582 	|| Average Reward:  61.84892709524226 	 epsilon:  0.12239274379499838
+209 	: Episode || Reward:  234.15308264160404 	|| Average Reward:  64.60313713158483 	 epsilon:  0.1211688163570484
+210 	: Episode || Reward:  12.202855777975088 	|| Average Reward:  63.57818286198302 	 epsilon:  0.11995712819347792
+211 	: Episode || Reward:  204.03461417706131 	|| Average Reward:  65.81955023341465 	 epsilon:  0.11875755691154315
+212 	: Episode || Reward:  -172.69920802820525 	|| Average Reward:  63.90996068605209 	 epsilon:  0.11756998134242772
+213 	: Episode || Reward:  199.24811112055733 	|| Average Reward:  64.9048115676731 	 epsilon:  0.11639428152900344
+214 	: Episode || Reward:  -102.97702560366336 	|| Average Reward:  63.74057574864434 	 epsilon:  0.11523033871371341
+215 	: Episode || Reward:  -180.09931731618047 	|| Average Reward:  61.56978929475593 	 epsilon:  0.11407803532657627
+216 	: Episode || Reward:  225.37560111142625 	|| Average Reward:  62.44387627533173 	 epsilon:  0.11293725497331052
+217 	: Episode || Reward:  253.79095168232135 	|| Average Reward:  63.76022138698918 	 epsilon:  0.1118078824235774
+218 	: Episode || Reward:  189.1471709199173 	|| Average Reward:  67.44070317965172 	 epsilon:  0.11068980359934164
+219 	: Episode || Reward:  180.398340003232 	|| Average Reward:  67.73150570791096 	 epsilon:  0.10958290556334822
+220 	: Episode || Reward:  206.06512103112308 	|| Average Reward:  68.91199443663052 	 epsilon:  0.10848707650771475
+221 	: Episode || Reward:  -221.52756873426242 	|| Average Reward:  65.63845219747947 	 epsilon:  0.1074022057426376
+222 	: Episode || Reward:  213.36686473115398 	|| Average Reward:  67.23690295160378 	 epsilon:  0.10632818368521123
+223 	: Episode || Reward:  216.4060277723429 	|| Average Reward:  69.0323515223952 	 epsilon:  0.10526490184835911
+224 	: Episode || Reward:  225.51467128695907 	|| Average Reward:  71.0285278501875 	 epsilon:  0.10421225282987552
+225 	: Episode || Reward:  169.4727611998795 	|| Average Reward:  71.4295625853471 	 epsilon:  0.10317013030157676
+226 	: Episode || Reward:  134.82656340814165 	|| Average Reward:  72.88935486357533 	 epsilon:  0.10213842899856099
+227 	: Episode || Reward:  250.37872592721575 	|| Average Reward:  76.68904711521958 	 epsilon:  0.10111704470857538
+228 	: Episode || Reward:  205.33600685082308 	|| Average Reward:  80.3671544197944 	 epsilon:  0.10010587426148963
+229 	: Episode || Reward:  -124.27968291627873 	|| Average Reward:  76.93048517930094 	 epsilon:  0.09910481551887473
+230 	: Episode || Reward:  -200.53671240616694 	|| Average Reward:  75.8854055186646 	 epsilon:  0.09811376736368599
+231 	: Episode || Reward:  -5.997068334703985 	|| Average Reward:  74.0909738631548 	 epsilon:  0.09713262969004913
+232 	: Episode || Reward:  207.124084380027 	|| Average Reward:  76.37435860128546 	 epsilon:  0.09616130339314863
+233 	: Episode || Reward:  257.1468820454105 	|| Average Reward:  77.55871616028477 	 epsilon:  0.09519969035921715
+234 	: Episode || Reward:  187.35681311461119 	|| Average Reward:  79.80700837032313 	 epsilon:  0.09424769345562498
+235 	: Episode || Reward:  9.380015159483062 	|| Average Reward:  79.42493503988563 	 epsilon:  0.09330521652106873
+236 	: Episode || Reward:  241.5651963081759 	|| Average Reward:  81.97861736101821 	 epsilon:  0.09237216435585804
+237 	: Episode || Reward:  223.91142091447983 	|| Average Reward:  82.80489836904987 	 epsilon:  0.09144844271229946
+238 	: Episode || Reward:  194.39043132193916 	|| Average Reward:  85.36940270411623 	 epsilon:  0.09053395828517646
+239 	: Episode || Reward:  148.20000032144563 	|| Average Reward:  86.88691034987104 	 epsilon:  0.08962861870232469
+240 	: Episode || Reward:  -71.06519167155962 	|| Average Reward:  84.78524087396192 	 epsilon:  0.08873233251530144
+241 	: Episode || Reward:  304.9908999407221 	|| Average Reward:  86.7186255573202 	 epsilon:  0.08784500919014843
+242 	: Episode || Reward:  189.8778454021247 	|| Average Reward:  89.19269591762381 	 epsilon:  0.08696655909824694
+243 	: Episode || Reward:  246.70095766230136 	|| Average Reward:  91.14730348548987 	 epsilon:  0.08609689350726446
+244 	: Episode || Reward:  225.07312629136794 	|| Average Reward:  92.90939358284872 	 epsilon:  0.08523592457219181
+245 	: Episode || Reward:  -41.715421958383274 	|| Average Reward:  92.99995997473647 	 epsilon:  0.0843835653264699
+246 	: Episode || Reward:  -0.40705449669239424 	|| Average Reward:  94.83213068550639 	 epsilon:  0.0835397296732052
+247 	: Episode || Reward:  181.81797496949588 	|| Average Reward:  96.04701764635907 	 epsilon:  0.08270433237647315
+248 	: Episode || Reward:  272.0268848638384 	|| Average Reward:  99.86839256273115 	 epsilon:  0.08187728905270841
+249 	: Episode || Reward:  -23.70458501998131 	|| Average Reward:  100.7535449482616 	 epsilon:  0.08105851616218133
+250 	: Episode || Reward:  66.06714908773873 	|| Average Reward:  101.85644876106464 	 epsilon:  0.08024793100055952
+251 	: Episode || Reward:  -112.204268581197 	|| Average Reward:  99.43908638957924 	 epsilon:  0.07944545169055392
+252 	: Episode || Reward:  -135.36025006971636 	|| Average Reward:  96.10854544603816 	 epsilon:  0.07865099717364837
+253 	: Episode || Reward:  142.71460379904494 	|| Average Reward:  97.15053172903245 	 epsilon:  0.07786448720191189
+254 	: Episode || Reward:  -99.11988796461519 	|| Average Reward:  94.00824767964949 	 epsilon:  0.07708584232989277
+255 	: Episode || Reward:  26.859389877642442 	|| Average Reward:  92.2801988387279 	 epsilon:  0.07631498390659384
+256 	: Episode || Reward:  -25.451318465992344 	|| Average Reward:  90.22725648826072 	 epsilon:  0.07555183406752791
+257 	: Episode || Reward:  179.26667221063693 	|| Average Reward:  92.32969908807598 	 epsilon:  0.07479631572685264
+258 	: Episode || Reward:  233.8018121397628 	|| Average Reward:  95.54916723760346 	 epsilon:  0.07404835256958411
+259 	: Episode || Reward:  245.73457780315726 	|| Average Reward:  97.82876717723944 	 epsilon:  0.07330786904388827
+260 	: Episode || Reward:  227.4766147841585 	|| Average Reward:  97.91349769630426 	 epsilon:  0.07257479035344938
+261 	: Episode || Reward:  289.2094679426183 	|| Average Reward:  98.62822268590605 	 epsilon:  0.07184904244991488
+262 	: Episode || Reward:  105.78547173083669 	|| Average Reward:  100.73090806472216 	 epsilon:  0.07113055202541574
+263 	: Episode || Reward:  240.1034224416575 	|| Average Reward:  104.29731804442162 	 epsilon:  0.07041924650516158
+264 	: Episode || Reward:  -7.114701000022805 	|| Average Reward:  103.18466444507634 	 epsilon:  0.06971505404010997
+265 	: Episode || Reward:  -214.75207289475793 	|| Average Reward:  101.37626983217602 	 epsilon:  0.06901790349970886
+266 	: Episode || Reward:  -297.6831503241316 	|| Average Reward:  96.70289642919295 	 epsilon:  0.06832772446471178
+267 	: Episode || Reward:  247.4605690143184 	|| Average Reward:  97.79643494317114 	 epsilon:  0.06764444722006466
+268 	: Episode || Reward:  289.49540687215426 	|| Average Reward:  98.29616338214332 	 epsilon:  0.066968002747864
+269 	: Episode || Reward:  241.01132003971736 	|| Average Reward:  99.57101497187173 	 epsilon:  0.06629832272038537
+270 	: Episode || Reward:  204.4386951761864 	|| Average Reward:  100.7889162944474 	 epsilon:  0.06563533949318151
+271 	: Episode || Reward:  -158.12540276268538 	|| Average Reward:  99.11888886163291 	 epsilon:  0.06497898609824969
+272 	: Episode || Reward:  266.51051196858623 	|| Average Reward:  100.35809685049456 	 epsilon:  0.0643291962372672
+273 	: Episode || Reward:  290.07501286402623 	|| Average Reward:  101.09530107978352 	 epsilon:  0.06368590427489453
+274 	: Episode || Reward:  253.11162621008828 	|| Average Reward:  104.66889620392513 	 epsilon:  0.06304904523214558
+275 	: Episode || Reward:  219.53920116473523 	|| Average Reward:  107.68707304092119 	 epsilon:  0.06241855477982412
+276 	: Episode || Reward:  267.3636196407764 	|| Average Reward:  112.31083309763268 	 epsilon:  0.06179436923202588
+277 	: Episode || Reward:  -113.35737512338336 	|| Average Reward:  112.8626525577011 	 epsilon:  0.06117642553970562
+278 	: Episode || Reward:  270.3218419729086 	|| Average Reward:  112.96780947224802 	 epsilon:  0.06056466128430856
+279 	: Episode || Reward:  222.7325140829346 	|| Average Reward:  115.82073834254453 	 epsilon:  0.05995901467146548
+280 	: Episode || Reward:  230.58450117688335 	|| Average Reward:  117.04847111186945 	 epsilon:  0.05935942452475082
+281 	: Episode || Reward:  21.741868943144894 	|| Average Reward:  116.02067211453935 	 epsilon:  0.058765830279503314
+282 	: Episode || Reward:  249.9055508431458 	|| Average Reward:  117.28637757773603 	 epsilon:  0.05817817197670828
+283 	: Episode || Reward:  162.4200715927316 	|| Average Reward:  118.58347870113384 	 epsilon:  0.057596390256941195
+284 	: Episode || Reward:  247.80355548983982 	|| Average Reward:  121.29508783654194 	 epsilon:  0.05702042635437178
+285 	: Episode || Reward:  177.56903526176544 	|| Average Reward:  120.97821087136225 	 epsilon:  0.05645022209082806
+286 	: Episode || Reward:  178.57178920250755 	|| Average Reward:  121.83546554131644 	 epsilon:  0.05588571986991978
+287 	: Episode || Reward:  230.3517394680558 	|| Average Reward:  122.99318885460575 	 epsilon:  0.055326862671220584
+288 	: Episode || Reward:  198.11011099945162 	|| Average Reward:  127.57644482888568 	 epsilon:  0.05477359404450838
+289 	: Episode || Reward:  -38.97330036463469 	|| Average Reward:  127.55488481107015 	 epsilon:  0.054225858104063294
+290 	: Episode || Reward:  126.29431722169865 	|| Average Reward:  126.97823795218747 	 epsilon:  0.05368359952302266
+291 	: Episode || Reward:  188.81435237687023 	|| Average Reward:  127.89593300536258 	 epsilon:  0.053146763527792434
+292 	: Episode || Reward:  218.62091593163 	|| Average Reward:  128.6046256201906 	 epsilon:  0.052615295892514506
+293 	: Episode || Reward:  14.32469915636824 	|| Average Reward:  126.36887183176661 	 epsilon:  0.052089142933589364
+294 	: Episode || Reward:  173.27415436031743 	|| Average Reward:  126.82265381676622 	 epsilon:  0.05156825150425347
+295 	: Episode || Reward:  18.12825032577861 	|| Average Reward:  126.36387145028446 	 epsilon:  0.051052568989210935
+296 	: Episode || Reward:  207.96074628773584 	|| Average Reward:  130.38875941240795 	 epsilon:  0.05054204329931883
+297 	: Episode || Reward:  -6.838409048562937 	|| Average Reward:  127.61214012901488 	 epsilon:  0.05003662286632564
+298 	: Episode || Reward:  223.741106787591 	|| Average Reward:  130.19491347618987 	 epsilon:  0.04953625663766238
+299 	: Episode || Reward:  267.92277744003013 	|| Average Reward:  132.99416894443257 	 epsilon:  0.04904089407128576
+300 	: Episode || Reward:  14.10739655733417 	|| Average Reward:  130.65040765539223 	 epsilon:  0.0485504851305729
+301 	: Episode || Reward:  232.18244855502758 	|| Average Reward:  129.9127205515981 	 epsilon:  0.048064980279267165
+302 	: Episode || Reward:  263.4234345015766 	|| Average Reward:  130.4873105727936 	 epsilon:  0.04758433047647449
+303 	: Episode || Reward:  241.04711877829655 	|| Average Reward:  130.16020484667274 	 epsilon:  0.04710848717170975
+304 	: Episode || Reward:  46.78175328809019 	|| Average Reward:  127.90870538057163 	 epsilon:  0.04663740229999265
+305 	: Episode || Reward:  232.80128699591378 	|| Average Reward:  127.798751564987 	 epsilon:  0.04617102827699272
+306 	: Episode || Reward:  219.82260247684818 	|| Average Reward:  130.03618132049593 	 epsilon:  0.045709317994222794
+307 	: Episode || Reward:  -25.61842408109429 	|| Average Reward:  127.610617244876 	 epsilon:  0.04525222481428057
+308 	: Episode || Reward:  0.5686928452048221 	|| Average Reward:  125.45626382857809 	 epsilon:  0.04479970256613776
+309 	: Episode || Reward:  249.27773776560355 	|| Average Reward:  125.60751037981811 	 epsilon:  0.04435170554047638
+310 	: Episode || Reward:  286.38871937113674 	|| Average Reward:  128.3493690157497 	 epsilon:  0.043908188485071616
+311 	: Episode || Reward:  74.67933757890093 	|| Average Reward:  127.05581624976809 	 epsilon:  0.0434691066002209
+312 	: Episode || Reward:  -81.669268857568 	|| Average Reward:  127.96611564147447 	 epsilon:  0.04303441553421869
+313 	: Episode || Reward:  193.17576392525044 	|| Average Reward:  127.9053921695214 	 epsilon:  0.0426040713788765
+314 	: Episode || Reward:  -119.81562731625348 	|| Average Reward:  127.7370061523955 	 epsilon:  0.04217803066508773
+315 	: Episode || Reward:  -47.629044409174526 	|| Average Reward:  129.06170888146556 	 epsilon:  0.04175625035843686
+316 	: Episode || Reward:  196.66432051182025 	|| Average Reward:  128.7745960754695 	 epsilon:  0.041338687854852486
+317 	: Episode || Reward:  278.3777341636691 	|| Average Reward:  129.02046390028298 	 epsilon:  0.04092530097630396
+318 	: Episode || Reward:  250.15697708559506 	|| Average Reward:  129.63056196193978 	 epsilon:  0.040516047966540916
+319 	: Episode || Reward:  211.98894816687618 	|| Average Reward:  129.94646804357617 	 epsilon:  0.04011088748687551
+320 	: Episode || Reward:  214.06009612789757 	|| Average Reward:  130.02641779454393 	 epsilon:  0.03970977861200675
+321 	: Episode || Reward:  245.8161368805129 	|| Average Reward:  134.69985485069168 	 epsilon:  0.03931268082588668
+322 	: Episode || Reward:  243.23097591100435 	|| Average Reward:  134.99849596249018 	 epsilon:  0.03891955401762781
+323 	: Episode || Reward:  156.25853556811234 	|| Average Reward:  134.3970210404479 	 epsilon:  0.03853035847745153
+324 	: Episode || Reward:  193.77478555220563 	|| Average Reward:  134.07962218310035 	 epsilon:  0.03814505489267701
+325 	: Episode || Reward:  239.83662293161404 	|| Average Reward:  134.7832608004177 	 epsilon:  0.03776360434375024
+326 	: Episode || Reward:  232.68552693941734 	|| Average Reward:  135.76185043573048 	 epsilon:  0.03738596830031274
+327 	: Episode || Reward:  22.354734027710556 	|| Average Reward:  133.48161051673543 	 epsilon:  0.03701210861730961
+328 	: Episode || Reward:  179.75251436233702 	|| Average Reward:  133.22577559185055 	 epsilon:  0.03664198753113651
+329 	: Episode || Reward:  -165.9132069170348 	|| Average Reward:  132.809440351843 	 epsilon:  0.036275567655825146
+330 	: Episode || Reward:  218.98524053951257 	|| Average Reward:  137.00465988129974 	 epsilon:  0.03591281197926689
+331 	: Episode || Reward:  291.8045568204181 	|| Average Reward:  139.982676132851 	 epsilon:  0.035553683859474224
+332 	: Episode || Reward:  196.85550977092151 	|| Average Reward:  139.8799903867599 	 epsilon:  0.03519814702087948
+333 	: Episode || Reward:  284.0157451973165 	|| Average Reward:  140.148679018279 	 epsilon:  0.03484616555067068
+334 	: Episode || Reward:  188.595181231943 	|| Average Reward:  140.16106269945234 	 epsilon:  0.034497703895163975
+335 	: Episode || Reward:  256.7398374317338 	|| Average Reward:  142.63466092217485 	 epsilon:  0.03415272685621234
+336 	: Episode || Reward:  288.08063739316776 	|| Average Reward:  143.0998153330248 	 epsilon:  0.03381119958765021
+337 	: Episode || Reward:  310.7556409253838 	|| Average Reward:  143.9682575331338 	 epsilon:  0.03347308759177371
+338 	: Episode || Reward:  -124.4251074629319 	|| Average Reward:  140.7801021452851 	 epsilon:  0.03313835671585597
+339 	: Episode || Reward:  261.25288563178844 	|| Average Reward:  141.9106309983885 	 epsilon:  0.03280697314869741
+340 	: Episode || Reward:  50.05682948413073 	|| Average Reward:  143.1218512099454 	 epsilon:  0.032478903417210436
+341 	: Episode || Reward:  290.99130377831244 	|| Average Reward:  142.98185524832132 	 epsilon:  0.032154114383038335
+342 	: Episode || Reward:  227.08304851884506 	|| Average Reward:  143.3539072794885 	 epsilon:  0.03183257323920795
+343 	: Episode || Reward:  244.2114699408902 	|| Average Reward:  143.32901240227443 	 epsilon:  0.03151424750681587
+344 	: Episode || Reward:  272.03052155075613 	|| Average Reward:  143.7985863548683 	 epsilon:  0.03119910503174771
+345 	: Episode || Reward:  83.43816306324024 	|| Average Reward:  145.05012220508453 	 epsilon:  0.030887113981430233
+346 	: Episode || Reward:  216.7998090375023 	|| Average Reward:  147.22219084042646 	 epsilon:  0.03057824284161593
+347 	: Episode || Reward:  273.10009043359025 	|| Average Reward:  148.13501199506743 	 epsilon:  0.03027246041319977
+348 	: Episode || Reward:  262.7237295563343 	|| Average Reward:  148.04198044199237 	 epsilon:  0.029969735809067772
+349 	: Episode || Reward:  210.59288300044648 	|| Average Reward:  150.38495512219666 	 epsilon:  0.029670038450977095
+350 	: Episode || Reward:  238.28227794015493 	|| Average Reward:  152.1071064107208 	 epsilon:  0.029373338066467324
+351 	: Episode || Reward:  -152.09854869166446 	|| Average Reward:  151.70816360961612 	 epsilon:  0.02907960468580265
+352 	: Episode || Reward:  167.27246650142047 	|| Average Reward:  154.73449077532752 	 epsilon:  0.028788808638944622
+353 	: Episode || Reward:  -25.87711343283797 	|| Average Reward:  153.04857360300866 	 epsilon:  0.028500920552555174
+354 	: Episode || Reward:  206.30504046412682 	|| Average Reward:  156.10282288729613 	 epsilon:  0.028215911347029624
+355 	: Episode || Reward:  282.8331695306937 	|| Average Reward:  158.66256068382663 	 epsilon:  0.027933752233559327
+356 	: Episode || Reward:  219.13582646313074 	|| Average Reward:  161.10843213311784 	 epsilon:  0.027654414711223735
+357 	: Episode || Reward:  253.6748545565865 	|| Average Reward:  161.85251395657733 	 epsilon:  0.027377870564111496
+358 	: Episode || Reward:  245.6715572257424 	|| Average Reward:  161.97121140743712 	 epsilon:  0.027104091858470382
+359 	: Episode || Reward:  164.45731689527395 	|| Average Reward:  161.1584387983583 	 epsilon:  0.026833050939885677
+360 	: Episode || Reward:  268.8479309898779 	|| Average Reward:  161.57215196041548 	 epsilon:  0.02656472043048682
+361 	: Episode || Reward:  267.64434090252985 	|| Average Reward:  161.3565006900146 	 epsilon:  0.02629907322618195
+362 	: Episode || Reward:  -110.34371228076148 	|| Average Reward:  159.19520884989862 	 epsilon:  0.026036082493920133
+363 	: Episode || Reward:  220.49840001060767 	|| Average Reward:  158.9991586255881 	 epsilon:  0.02577572166898093
+364 	: Episode || Reward:  266.08885936022807 	|| Average Reward:  161.73119422919063 	 epsilon:  0.025517964452291122
+365 	: Episode || Reward:  246.08147633827758 	|| Average Reward:  166.339529721521 	 epsilon:  0.02526278480776821
+366 	: Episode || Reward:  254.83225746672616 	|| Average Reward:  171.86468379942954 	 epsilon:  0.025010156959690527
+367 	: Episode || Reward:  269.51704803400816 	|| Average Reward:  172.08524858962647 	 epsilon:  0.02476005539009362
+368 	: Episode || Reward:  231.50332251487168 	|| Average Reward:  171.50532774605364 	 epsilon:  0.024512454836192684
+369 	: Episode || Reward:  239.92420494905056 	|| Average Reward:  171.49445659514697 	 epsilon:  0.024267330287830756
+370 	: Episode || Reward:  173.85605672939766 	|| Average Reward:  171.18863021067907 	 epsilon:  0.024024656984952448
+371 	: Episode || Reward:  295.5069565213009 	|| Average Reward:  175.72495380351896 	 epsilon:  0.023784410415102923
+372 	: Episode || Reward:  58.21740043065924 	|| Average Reward:  173.64202268813966 	 epsilon:  0.023546566310951894
+373 	: Episode || Reward:  220.6378046696596 	|| Average Reward:  172.947650606196 	 epsilon:  0.023311100647842375
+374 	: Episode || Reward:  292.41336782708856 	|| Average Reward:  173.340668022366 	 epsilon:  0.02307798964136395
+375 	: Episode || Reward:  229.53710410568902 	|| Average Reward:  173.44064705177553 	 epsilon:  0.022847209744950314
+376 	: Episode || Reward:  264.54378124961414 	|| Average Reward:  173.4124486678639 	 epsilon:  0.02261873764750081
+377 	: Episode || Reward:  -249.22738859096967 	|| Average Reward:  172.05374853318807 	 epsilon:  0.022392550271025803
+378 	: Episode || Reward:  253.87623669974454 	|| Average Reward:  171.8892924804564 	 epsilon:  0.022168624768315544
+379 	: Episode || Reward:  -137.93442983438302 	|| Average Reward:  168.28262304128322 	 epsilon:  0.02194693852063239
+380 	: Episode || Reward:  243.4577464807459 	|| Average Reward:  168.41135549432184 	 epsilon:  0.021727469135426065
+381 	: Episode || Reward:  205.52279871443758 	|| Average Reward:  170.24916479203478 	 epsilon:  0.021510194444071803
+382 	: Episode || Reward:  225.27061249954656 	|| Average Reward:  170.0028154085988 	 epsilon:  0.021295092499631085
+383 	: Episode || Reward:  284.57124704176596 	|| Average Reward:  171.22432716308919 	 epsilon:  0.021082141574634772
+384 	: Episode || Reward:  241.2764466138972 	|| Average Reward:  171.15905607432975 	 epsilon:  0.020871320158888425
+385 	: Episode || Reward:  -206.46343424680026 	|| Average Reward:  167.3187313792441 	 epsilon:  0.020662606957299542
+386 	: Episode || Reward:  277.38803681138745 	|| Average Reward:  168.30689385533285 	 epsilon:  0.020455980887726547
+387 	: Episode || Reward:  191.8677666885554 	|| Average Reward:  167.92205412753788 	 epsilon:  0.02025142107884928
+388 	: Episode || Reward:  236.8264010055425 	|| Average Reward:  168.30921702759878 	 epsilon:  0.020048906868060788
+389 	: Episode || Reward:  243.98560633665517 	|| Average Reward:  171.1388060946117 	 epsilon:  0.01984841779938018
+390 	: Episode || Reward:  113.06181198064536 	|| Average Reward:  171.00648104220116 	 epsilon:  0.019649933621386378
+391 	: Episode || Reward:  -222.11389329223812 	|| Average Reward:  166.8971985855101 	 epsilon:  0.019453434285172513
+392 	: Episode || Reward:  160.14035032883837 	|| Average Reward:  166.3123929294822 	 epsilon:  0.019258899942320787
+393 	: Episode || Reward:  279.73237319130317 	|| Average Reward:  168.9664696698315 	 epsilon:  0.01906631094289758
+394 	: Episode || Reward:  142.36838012130548 	|| Average Reward:  168.65741192744133 	 epsilon:  0.018875647833468602
+395 	: Episode || Reward:  211.80334002173169 	|| Average Reward:  170.59416282440088 	 epsilon:  0.018686891355133916
+396 	: Episode || Reward:  -65.59883134973346 	|| Average Reward:  167.8585670480262 	 epsilon:  0.018500022441582577
+397 	: Episode || Reward:  266.2796642271601 	|| Average Reward:  170.58974778078343 	 epsilon:  0.01831502221716675
+398 	: Episode || Reward:  241.18926926992535 	|| Average Reward:  170.7642294056068 	 epsilon:  0.018131871994995084
+399 	: Episode || Reward:  240.09436088406716 	|| Average Reward:  170.48594524004716 	 epsilon:  0.017950553275045134
+400 	: Episode || Reward:  218.43624909582908 	|| Average Reward:  172.5292337654321 	 epsilon:  0.017771047742294682
+401 	: Episode || Reward:  234.46267163858883 	|| Average Reward:  172.55203599626773 	 epsilon:  0.017593337264871736
+402 	: Episode || Reward:  221.9476696245112 	|| Average Reward:  172.13727834749707 	 epsilon:  0.01741740389222302
+403 	: Episode || Reward:  -166.05815997291018 	|| Average Reward:  168.06622555998504 	 epsilon:  0.01724322985330079
+404 	: Episode || Reward:  268.7854713051773 	|| Average Reward:  170.2862627401559 	 epsilon:  0.017070797554767782
+405 	: Episode || Reward:  183.57592318003228 	|| Average Reward:  169.79400910199712 	 epsilon:  0.016900089579220106
+406 	: Episode || Reward:  240.3417830352816 	|| Average Reward:  169.99920090758135 	 epsilon:  0.016731088683427906
+407 	: Episode || Reward:  145.27141323806086 	|| Average Reward:  171.70809928077296 	 epsilon:  0.016563777796593626
+408 	: Episode || Reward:  167.94624046769252 	|| Average Reward:  173.38187475699783 	 epsilon:  0.016398140018627688
+409 	: Episode || Reward:  -3.9422202979146306 	|| Average Reward:  170.8496751763626 	 epsilon:  0.01623415861844141
+410 	: Episode || Reward:  207.08042888793815 	|| Average Reward:  170.0565922715306 	 epsilon:  0.016071817032256998
+411 	: Episode || Reward:  285.0152550738882 	|| Average Reward:  172.1599514464805 	 epsilon:  0.01591109886193443
+412 	: Episode || Reward:  279.88927315632156 	|| Average Reward:  175.7755368666194 	 epsilon:  0.015751987873315085
+413 	: Episode || Reward:  307.30970428978924 	|| Average Reward:  176.9168762702648 	 epsilon:  0.015594467994581935
+414 	: Episode || Reward:  49.40478070388019 	|| Average Reward:  178.60908035046614 	 epsilon:  0.015438523314636115
+415 	: Episode || Reward:  278.7470562938707 	|| Average Reward:  181.8728413574966 	 epsilon:  0.015284138081489753
+416 	: Episode || Reward:  1.0955671014612136 	|| Average Reward:  179.91715382339302 	 epsilon:  0.015131296700674856
+417 	: Episode || Reward:  238.0093665796704 	|| Average Reward:  179.51347014755302 	 epsilon:  0.014979983733668108
+418 	: Episode || Reward:  159.99504774339897 	|| Average Reward:  178.61185085413103 	 epsilon:  0.014830183896331426
+419 	: Episode || Reward:  300.2173926899706 	|| Average Reward:  179.494135299362 	 epsilon:  0.014681882057368112
+420 	: Episode || Reward:  267.4484874000824 	|| Average Reward:  180.02801921208382 	 epsilon:  0.01453506323679443
+421 	: Episode || Reward:  227.7841818443346 	|| Average Reward:  179.84769966172203 	 epsilon:  0.014389712604426485
+422 	: Episode || Reward:  240.14087527581327 	|| Average Reward:  179.81679865537012 	 epsilon:  0.01424581547838222
+423 	: Episode || Reward:  300.6369062852217 	|| Average Reward:  181.26058236254124 	 epsilon:  0.014103357323598397
+424 	: Episode || Reward:  188.68574211460546 	|| Average Reward:  181.20969192816523 	 epsilon:  0.013962323750362413
+425 	: Episode || Reward:  263.38225941605504 	|| Average Reward:  181.44514829300962 	 epsilon:  0.013822700512858789
+426 	: Episode || Reward:  293.3107163349563 	|| Average Reward:  182.05140018696503 	 epsilon:  0.0136844735077302
+427 	: Episode || Reward:  250.75912351074663 	|| Average Reward:  184.3354440817954 	 epsilon:  0.013547628772652899
+428 	: Episode || Reward:  198.33804807082677 	|| Average Reward:  184.5212994188803 	 epsilon:  0.01341215248492637
+429 	: Episode || Reward:  242.34630563794775 	|| Average Reward:  188.60389454443012 	 epsilon:  0.013278030960077106
+430 	: Episode || Reward:  153.82817005388415 	|| Average Reward:  187.9523238395738 	 epsilon:  0.013145250650476335
+431 	: Episode || Reward:  280.0661575088159 	|| Average Reward:  187.8349398464578 	 epsilon:  0.01301379814397157
+432 	: Episode || Reward:  147.31612169008207 	|| Average Reward:  187.33954596564936 	 epsilon:  0.012883660162531854
+433 	: Episode || Reward:  267.27229414994713 	|| Average Reward:  187.17211145517572 	 epsilon:  0.012754823560906535
+434 	: Episode || Reward:  258.2840880258202 	|| Average Reward:  187.8690005231145 	 epsilon:  0.01262727532529747
+435 	: Episode || Reward:  270.41858786755546 	|| Average Reward:  188.0057880274727 	 epsilon:  0.012501002572044496
+436 	: Episode || Reward:  227.77318026433784 	|| Average Reward:  187.40271345618442 	 epsilon:  0.01237599254632405
+437 	: Episode || Reward:  285.841665287256 	|| Average Reward:  187.15357369980313 	 epsilon:  0.01225223262086081
+438 	: Episode || Reward:  -96.96949328431164 	|| Average Reward:  187.42812984158934 	 epsilon:  0.012129710294652202
+439 	: Episode || Reward:  251.36378334754806 	|| Average Reward:  187.32923881874692 	 epsilon:  0.01200841319170568
+440 	: Episode || Reward:  292.6782989634539 	|| Average Reward:  189.75545351354012 	 epsilon:  0.011888329059788623
+441 	: Episode || Reward:  279.8430398604237 	|| Average Reward:  189.64397087436126 	 epsilon:  0.011769445769190737
+442 	: Episode || Reward:  -43.405123060147055 	|| Average Reward:  186.93908915857136 	 epsilon:  0.01165175131149883
+443 	: Episode || Reward:  -133.23235958781464 	|| Average Reward:  183.1646508632843 	 epsilon:  0.011535233798383842
+444 	: Episode || Reward:  288.3591435968766 	|| Average Reward:  183.32793708374552 	 epsilon:  0.011419881460400004
+445 	: Episode || Reward:  159.47758002424217 	|| Average Reward:  184.08833125335553 	 epsilon:  0.011305682645796004
+446 	: Episode || Reward:  256.69783960294313 	|| Average Reward:  184.48731155900995 	 epsilon:  0.011192625819338045
+447 	: Episode || Reward:  256.3086223540624 	|| Average Reward:  184.31939687821472 	 epsilon:  0.011080699561144665
+448 	: Episode || Reward:  278.79363111292446 	|| Average Reward:  184.48009589378057 	 epsilon:  0.010969892565533218
+449 	: Episode || Reward:  278.66095956525317 	|| Average Reward:  185.16077665942868 	 epsilon:  0.010860193639877886
+450 	: Episode || Reward:  246.36134066259746 	|| Average Reward:  185.24156728665304 	 epsilon:  0.010751591703479106
+451 	: Episode || Reward:  251.91780031903224 	|| Average Reward:  189.28173077676 	 epsilon:  0.010644075786444315
+452 	: Episode || Reward:  281.0016951174915 	|| Average Reward:  190.41902306292076 	 epsilon:  0.010537635028579873
+453 	: Episode || Reward:  282.78330808485947 	|| Average Reward:  193.5056272780977 	 epsilon:  0.010432258678294073
+454 	: Episode || Reward:  -274.27154443271024 	|| Average Reward:  188.6998614291293 	 epsilon:  0.010327936091511133
+455 	: Episode || Reward:  273.6378438659649 	|| Average Reward:  188.60790817248207 	 epsilon:  0.010224656730596022
+456 	: Episode || Reward:  -40.06482996640035 	|| Average Reward:  186.0159016081867 	 epsilon:  0.01012241016329006
+457 	: Episode || Reward:  285.6111444866683 	|| Average Reward:  186.33526450748755 	 epsilon:  0.01002118606165716
+458 	: Episode || Reward:  240.63111965749744 	|| Average Reward:  186.28486013180515 	 epsilon:  0.009920974201040588
+459 	: Episode || Reward:  233.36054236997137 	|| Average Reward:  186.97389238655208 	 epsilon:  0.009920974201040588
+460 	: Episode || Reward:  278.226791248243 	|| Average Reward:  187.0676809891357 	 epsilon:  0.009920974201040588
+461 	: Episode || Reward:  259.6331894550523 	|| Average Reward:  186.98756947466092 	 epsilon:  0.009920974201040588
+462 	: Episode || Reward:  283.9679652435303 	|| Average Reward:  190.93068624990386 	 epsilon:  0.009920974201040588
+463 	: Episode || Reward:  185.71838258237437 	|| Average Reward:  190.58288607562153 	 epsilon:  0.009920974201040588
+464 	: Episode || Reward:  278.27258340861397 	|| Average Reward:  190.70472331610537 	 epsilon:  0.009920974201040588
+465 	: Episode || Reward:  -26.945519675321478 	|| Average Reward:  187.9744533559694 	 epsilon:  0.009920974201040588
+466 	: Episode || Reward:  240.16841964657507 	|| Average Reward:  187.82781497776787 	 epsilon:  0.009920974201040588
+467 	: Episode || Reward:  231.12639431468273 	|| Average Reward:  187.44390844057463 	 epsilon:  0.009920974201040588
+468 	: Episode || Reward:  277.0034653509904 	|| Average Reward:  187.89890986893585 	 epsilon:  0.009920974201040588
+469 	: Episode || Reward:  199.42268055486244 	|| Average Reward:  187.493894624994 	 epsilon:  0.009920974201040588
+470 	: Episode || Reward:  212.14796167999143 	|| Average Reward:  187.87681367449994 	 epsilon:  0.009920974201040588
+471 	: Episode || Reward:  203.82345087600416 	|| Average Reward:  186.9599786180469 	 epsilon:  0.009920974201040588
+472 	: Episode || Reward:  221.34227241883508 	|| Average Reward:  188.59122733792873 	 epsilon:  0.009920974201040588
+473 	: Episode || Reward:  -151.65511347998768 	|| Average Reward:  184.86829815643216 	 epsilon:  0.009920974201040588
+474 	: Episode || Reward:  11.689965719701135 	|| Average Reward:  182.06106413535835 	 epsilon:  0.009920974201040588
+475 	: Episode || Reward:  269.5552533452569 	|| Average Reward:  182.461245627754 	 epsilon:  0.009920974201040588
+476 	: Episode || Reward:  257.3618572420836 	|| Average Reward:  182.38942638767872 	 epsilon:  0.009920974201040588
+477 	: Episode || Reward:  -101.1521364180775 	|| Average Reward:  183.87017890940763 	 epsilon:  0.009920974201040588
+478 	: Episode || Reward:  275.20621886215935 	|| Average Reward:  184.0834787310318 	 epsilon:  0.009920974201040588
+479 	: Episode || Reward:  242.53754023619672 	|| Average Reward:  187.88819843173755 	 epsilon:  0.009920974201040588
+480 	: Episode || Reward:  269.2857930743929 	|| Average Reward:  188.14647889767406 	 epsilon:  0.009920974201040588
+481 	: Episode || Reward:  -102.0631572514794 	|| Average Reward:  185.07061933801486 	 epsilon:  0.009920974201040588
+482 	: Episode || Reward:  204.46309914032227 	|| Average Reward:  184.86254420442262 	 epsilon:  0.009920974201040588
+483 	: Episode || Reward:  254.81222044712845 	|| Average Reward:  184.5649539384762 	 epsilon:  0.009920974201040588
+484 	: Episode || Reward:  -163.22306069389776 	|| Average Reward:  180.51995886539828 	 epsilon:  0.009920974201040588
+485 	: Episode || Reward:  209.29039078685724 	|| Average Reward:  184.67749711573487 	 epsilon:  0.009920974201040588
+486 	: Episode || Reward:  206.15282890749864 	|| Average Reward:  183.96514503669601 	 epsilon:  0.009920974201040588
+487 	: Episode || Reward:  222.9748998767249 	|| Average Reward:  184.2762163685777 	 epsilon:  0.009920974201040588
+488 	: Episode || Reward:  -246.01069104613018 	|| Average Reward:  179.44784544806097 	 epsilon:  0.009920974201040588
+489 	: Episode || Reward:  268.0744858163431 	|| Average Reward:  179.68873424285783 	 epsilon:  0.009920974201040588
+490 	: Episode || Reward:  226.512735534061 	|| Average Reward:  180.82324347839196 	 epsilon:  0.009920974201040588
+491 	: Episode || Reward:  -36.05517428118311 	|| Average Reward:  182.68383066850254 	 epsilon:  0.009920974201040588
+492 	: Episode || Reward:  224.0626919515401 	|| Average Reward:  183.32305408472956 	 epsilon:  0.009920974201040588
+493 	: Episode || Reward:  -133.92298292183858 	|| Average Reward:  179.1865005235981 	 epsilon:  0.009920974201040588
+494 	: Episode || Reward:  198.4134294749781 	|| Average Reward:  179.74695101713488 	 epsilon:  0.009920974201040588
+495 	: Episode || Reward:  229.46482138877047 	|| Average Reward:  179.92356583080527 	 epsilon:  0.009920974201040588
+496 	: Episode || Reward:  141.78564463964807 	|| Average Reward:  181.99741059069908 	 epsilon:  0.009920974201040588
+497 	: Episode || Reward:  258.73892947657293 	|| Average Reward:  181.92200324319322 	 epsilon:  0.009920974201040588
+498 	: Episode || Reward:  187.28933226626185 	|| Average Reward:  181.38300387315658 	 epsilon:  0.009920974201040588
+499 	: Episode || Reward:  -189.10501643935328 	|| Average Reward:  177.09101009992239 	 epsilon:  0.009920974201040588
+500 	: Episode || Reward:  249.25465322598885 	|| Average Reward:  177.39919414122397 	 epsilon:  0.009920974201040588
+501 	: Episode || Reward:  -10.408963983329727 	|| Average Reward:  174.95047778500478 	 epsilon:  0.009920974201040588
+502 	: Episode || Reward:  217.6129601276864 	|| Average Reward:  174.90713069003658 	 epsilon:  0.009920974201040588
+503 	: Episode || Reward:  242.02266077342216 	|| Average Reward:  178.98793889749987 	 epsilon:  0.009920974201040588
+504 	: Episode || Reward:  257.5259509858059 	|| Average Reward:  178.87534369430617 	 epsilon:  0.009920974201040588
+505 	: Episode || Reward:  -264.05047734005825 	|| Average Reward:  174.39907968910526 	 epsilon:  0.009920974201040588
+506 	: Episode || Reward:  203.71480638628154 	|| Average Reward:  174.03280992261523 	 epsilon:  0.009920974201040588
+507 	: Episode || Reward:  -259.7655432660332 	|| Average Reward:  169.98244035757432 	 epsilon:  0.009920974201040588
+508 	: Episode || Reward:  281.9729191365253 	|| Average Reward:  171.12270714426268 	 epsilon:  0.009920974201040588
+509 	: Episode || Reward:  207.18027131426788 	|| Average Reward:  173.23393206038446 	 epsilon:  0.009920974201040588
+510 	: Episode || Reward:  260.5681994377332 	|| Average Reward:  173.76880976588242 	 epsilon:  0.009920974201040588
+511 	: Episode || Reward:  246.3275634289423 	|| Average Reward:  173.38193284943296 	 epsilon:  0.009920974201040588
+512 	: Episode || Reward:  250.26168007671203 	|| Average Reward:  173.0856569186369 	 epsilon:  0.009920974201040588
+513 	: Episode || Reward:  169.66784194937543 	|| Average Reward:  171.70923829523272 	 epsilon:  0.009920974201040588
+514 	: Episode || Reward:  259.20189776301436 	|| Average Reward:  173.8072094658241 	 epsilon:  0.009920974201040588
+515 	: Episode || Reward:  203.80361893510383 	|| Average Reward:  173.0577750922364 	 epsilon:  0.009920974201040588
+516 	: Episode || Reward:  -147.12096474637084 	|| Average Reward:  171.5756097737581 	 epsilon:  0.009920974201040588
+517 	: Episode || Reward:  -64.856720607699 	|| Average Reward:  168.54694890188438 	 epsilon:  0.009920974201040588
+518 	: Episode || Reward:  278.7251331127205 	|| Average Reward:  169.73424975557762 	 epsilon:  0.009920974201040588
+519 	: Episode || Reward:  234.183189770139 	|| Average Reward:  169.07390772637925 	 epsilon:  0.009920974201040588
+520 	: Episode || Reward:  215.1086296927893 	|| Average Reward:  168.55050914930632 	 epsilon:  0.009920974201040588
+521 	: Episode || Reward:  276.83105067293747 	|| Average Reward:  169.04097783759232 	 epsilon:  0.009920974201040588
+522 	: Episode || Reward:  242.9914738190027 	|| Average Reward:  169.06948382302423 	 epsilon:  0.009920974201040588
+523 	: Episode || Reward:  276.5114276228327 	|| Average Reward:  168.82822903640042 	 epsilon:  0.009920974201040588
+524 	: Episode || Reward:  237.9389460103253 	|| Average Reward:  169.32076107535758 	 epsilon:  0.009920974201040588
+525 	: Episode || Reward:  266.8952139007265 	|| Average Reward:  169.3558906202043 	 epsilon:  0.009920974201040588
+526 	: Episode || Reward:  287.8322215977395 	|| Average Reward:  169.30110567283208 	 epsilon:  0.009920974201040588
+527 	: Episode || Reward:  252.61639748850183 	|| Average Reward:  169.31967841260965 	 epsilon:  0.009920974201040588
+528 	: Episode || Reward:  254.71757215122548 	|| Average Reward:  169.88347365341363 	 epsilon:  0.009920974201040588
+529 	: Episode || Reward:  271.472402707623 	|| Average Reward:  170.17473462411039 	 epsilon:  0.009920974201040588
+530 	: Episode || Reward:  243.85864492905583 	|| Average Reward:  171.0750393728621 	 epsilon:  0.009920974201040588
+531 	: Episode || Reward:  262.8192072060049 	|| Average Reward:  170.902569869834 	 epsilon:  0.009920974201040588
+532 	: Episode || Reward:  257.07539275087595 	|| Average Reward:  172.00016258044198 	 epsilon:  0.009920974201040588
+533 	: Episode || Reward:  255.6286918156497 	|| Average Reward:  171.883726557099 	 epsilon:  0.009920974201040588
+534 	: Episode || Reward:  276.581758108252 	|| Average Reward:  172.06670325792334 	 epsilon:  0.009920974201040588
+535 	: Episode || Reward:  18.769262409327894 	|| Average Reward:  169.55021000334105 	 epsilon:  0.009920974201040588
+536 	: Episode || Reward:  265.32195448323375 	|| Average Reward:  169.92569774553002 	 epsilon:  0.009920974201040588
+537 	: Episode || Reward:  239.48377324871782 	|| Average Reward:  169.46211882514461 	 epsilon:  0.009920974201040588
+538 	: Episode || Reward:  185.1267448109984 	|| Average Reward:  172.2830812060977 	 epsilon:  0.009920974201040588
+539 	: Episode || Reward:  257.80273446994113 	|| Average Reward:  172.34747071732164 	 epsilon:  0.009920974201040588
+540 	: Episode || Reward:  -290.08184965869145 	|| Average Reward:  166.51986923110016 	 epsilon:  0.009920974201040588
+541 	: Episode || Reward:  271.0857129184274 	|| Average Reward:  166.43229596168018 	 epsilon:  0.009920974201040588
+542 	: Episode || Reward:  286.0082333106923 	|| Average Reward:  169.7264295253886 	 epsilon:  0.009920974201040588
+543 	: Episode || Reward:  241.32888395916498 	|| Average Reward:  173.4720419608584 	 epsilon:  0.009920974201040588
+544 	: Episode || Reward:  266.72902598238886 	|| Average Reward:  173.25574078471354 	 epsilon:  0.009920974201040588
+545 	: Episode || Reward:  254.87163427221753 	|| Average Reward:  174.2096813271933 	 epsilon:  0.009920974201040588
+546 	: Episode || Reward:  251.38975326219168 	|| Average Reward:  174.1566004637858 	 epsilon:  0.009920974201040588
+547 	: Episode || Reward:  277.8845825717161 	|| Average Reward:  174.3723600659623 	 epsilon:  0.009920974201040588
+548 	: Episode || Reward:  22.029502934600032 	|| Average Reward:  171.80471878417904 	 epsilon:  0.009920974201040588
+549 	: Episode || Reward:  289.81488059373675 	|| Average Reward:  171.91625799446393 	 epsilon:  0.009920974201040588
+550 	: Episode || Reward:  289.5877450762545 	|| Average Reward:  172.34852203860046 	 epsilon:  0.009920974201040588
+551 	: Episode || Reward:  280.3815585590139 	|| Average Reward:  172.63315962100026 	 epsilon:  0.009920974201040588
+552 	: Episode || Reward:  273.3922635618744 	|| Average Reward:  172.5570653054441 	 epsilon:  0.009920974201040588
+553 	: Episode || Reward:  259.9103281791822 	|| Average Reward:  172.3283355063873 	 epsilon:  0.009920974201040588
+554 	: Episode || Reward:  247.8012865726646 	|| Average Reward:  177.54906381644105 	 epsilon:  0.009920974201040588
+555 	: Episode || Reward:  248.9260733848157 	|| Average Reward:  177.30194611162958 	 epsilon:  0.009920974201040588
+556 	: Episode || Reward:  221.88083185337692 	|| Average Reward:  179.92140272982738 	 epsilon:  0.009920974201040588
+557 	: Episode || Reward:  290.301139489585 	|| Average Reward:  179.9683026798565 	 epsilon:  0.009920974201040588
+558 	: Episode || Reward:  257.0683879187588 	|| Average Reward:  180.1326753624692 	 epsilon:  0.009920974201040588
+559 	: Episode || Reward:  202.28934014766472 	|| Average Reward:  179.82196334024607 	 epsilon:  0.009920974201040588
+560 	: Episode || Reward:  255.36727762777446 	|| Average Reward:  179.5933682040414 	 epsilon:  0.009920974201040588
+561 	: Episode || Reward:  317.7094469548857 	|| Average Reward:  180.17413077903973 	 epsilon:  0.009920974201040588
+562 	: Episode || Reward:  283.7789805904918 	|| Average Reward:  180.17224093250934 	 epsilon:  0.009920974201040588
+563 	: Episode || Reward:  190.25279615539753 	|| Average Reward:  180.21758506823957 	 epsilon:  0.009920974201040588
+564 	: Episode || Reward:  287.32078013361627 	|| Average Reward:  180.3080670354896 	 epsilon:  0.009920974201040588
+565 	: Episode || Reward:  224.6189602798338 	|| Average Reward:  182.82371183504114 	 epsilon:  0.009920974201040588
+566 	: Episode || Reward:  269.65891462881245 	|| Average Reward:  183.11861678486352 	 epsilon:  0.009920974201040588
+567 	: Episode || Reward:  280.31095456136654 	|| Average Reward:  183.61046238733036 	 epsilon:  0.009920974201040588
+568 	: Episode || Reward:  286.23941106689716 	|| Average Reward:  183.70282184448945 	 epsilon:  0.009920974201040588
+569 	: Episode || Reward:  174.08426050464914 	|| Average Reward:  183.4494376439873 	 epsilon:  0.009920974201040588
+570 	: Episode || Reward:  310.1497566143264 	|| Average Reward:  184.42945559333063 	 epsilon:  0.009920974201040588
+571 	: Episode || Reward:  290.9914599416129 	|| Average Reward:  185.30113568398673 	 epsilon:  0.009920974201040588
+572 	: Episode || Reward:  316.4571322745612 	|| Average Reward:  186.252284282544 	 epsilon:  0.009920974201040588
+573 	: Episode || Reward:  271.944576766867 	|| Average Reward:  190.48828118501248 	 epsilon:  0.009920974201040588
+574 	: Episode || Reward:  274.38198862918796 	|| Average Reward:  193.1152014141074 	 epsilon:  0.009920974201040588
+575 	: Episode || Reward:  223.85496587841465 	|| Average Reward:  192.658198539439 	 epsilon:  0.009920974201040588
+576 	: Episode || Reward:  178.6017922383121 	|| Average Reward:  191.87059788940124 	 epsilon:  0.009920974201040588
+577 	: Episode || Reward:  236.7058929491952 	|| Average Reward:  195.24917818307395 	 epsilon:  0.009920974201040588
+578 	: Episode || Reward:  280.6761471476027 	|| Average Reward:  195.3038774659284 	 epsilon:  0.009920974201040588
+579 	: Episode || Reward:  191.55304075557802 	|| Average Reward:  194.7940324711222 	 epsilon:  0.009920974201040588
+580 	: Episode || Reward:  281.3290696545912 	|| Average Reward:  194.9144652369242 	 epsilon:  0.009920974201040588
+581 	: Episode || Reward:  262.5026761388881 	|| Average Reward:  198.5601235708279 	 epsilon:  0.009920974201040588
+582 	: Episode || Reward:  176.37513174626815 	|| Average Reward:  198.27924389688732 	 epsilon:  0.009920974201040588
+583 	: Episode || Reward:  290.5263553987826 	|| Average Reward:  198.63638524640385 	 epsilon:  0.009920974201040588
+DQN Training Complete...
+Starting Testing of the trained model...
+0 	: Episode || Reward:  296.60438172359295
+1 	: Episode || Reward:  250.05142326187777
+2 	: Episode || Reward:  209.0340986631786
+3 	: Episode || Reward:  308.2366253952687
+4 	: Episode || Reward:  -96.34141394755443
+5 	: Episode || Reward:  278.2519328149979
+6 	: Episode || Reward:  250.46777808303355
+7 	: Episode || Reward:  244.65752408615595
+8 	: Episode || Reward:  271.9656245226519
+9 	: Episode || Reward:  257.9457735840642
+10 	: Episode || Reward:  267.7053381742212
+
